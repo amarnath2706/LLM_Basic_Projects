@@ -1,14 +1,15 @@
 import os
 from dotenv import load_dotenv, find_dotenv
 _ = load_dotenv(find_dotenv())
-openai_api_key = os.environ["OPENAI_API_KEY"]
+groq_api_key = os.environ["GROQ_API_KEY"]
 
-from langchain_openai import ChatOpenAI
+from langchain_groq import ChatGroq
 
-llm = ChatOpenAI(model="gpt-3.5-turbo-0125")
+llm = ChatGroq(model="mixtral-8x7b-32768")
 
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.pydantic_v1 import BaseModel, Field
+from langchain_groq import ChatGroq
 
 tagging_prompt = ChatPromptTemplate.from_template(
     """
@@ -30,7 +31,7 @@ class Classification(BaseModel):
 
 
 # LLM
-llm = ChatOpenAI(temperature=0, model="gpt-3.5-turbo-0125").with_structured_output(
+llm = ChatGroq(temperature=0, model="mixtral-8x7b-32768").with_structured_output(
     Classification
 )
 
@@ -84,7 +85,7 @@ Passage:
 """
 )
 
-llm = ChatOpenAI(temperature=0, model="gpt-3.5-turbo-0125").with_structured_output(
+llm = ChatGroq(temperature=0, model="mixtral-8x7b-32768").with_structured_output(
     Classification
 )
 
